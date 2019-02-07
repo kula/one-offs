@@ -1,0 +1,17 @@
+# Put this file in /etc/bash_completion.d, or, if you've set up
+# .bashrc properly, ${HOME}/.bash_completion.d/
+
+# This code is a slight variation on what `gopass completion bash`
+# returns
+
+_yubienv_bash_autocomplete() {
+     local cur opts base
+     COMPREPLY=()
+     cur="${COMP_WORDS[COMP_CWORD]}"
+     opts=$( gopass ${COMP_WORDS[@]:1:$COMP_CWORD} --generate-bash-completion )
+     local IFS=$'\n'
+     COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+     return 0
+}
+
+complete -F _yubienv_bash_autocomplete yubi-env
