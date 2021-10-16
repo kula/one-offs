@@ -1,0 +1,7 @@
+#!/bin/bash
+if [ -z "${PASS_SUDO_PATH}" ]; then
+    read -p "Enter pass path: " PASS_SUDO_PATH
+fi
+PASSWD=$(pass ${PASS_SUDO_PATH} 2>/dev/null | head -1)
+printf "${PASSWD}\n"
+exit 0
